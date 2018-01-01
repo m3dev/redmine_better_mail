@@ -6,7 +6,6 @@ Redmine::Plugin.register :readable_mail do
   version '0.0.1'
   url ''
   author_url ''
-
 end
 
 
@@ -14,5 +13,7 @@ Rails.application.config.to_prepare do
   unless Mailer.included_modules.include?(ReadableMail::MailerPatch)
     Mailer.send :include, ReadableMail::MailerPatch
   end
+
+  ActionView::Base.send(:include, FineMailHelper)
 end
 

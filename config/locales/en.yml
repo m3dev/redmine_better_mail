@@ -1,0 +1,9 @@
+en:
+  readable_mail:
+    diff_change:
+      updated: updated
+      changed: changed
+      added: added
+      set_to: set to
+      deleted: deleted
+

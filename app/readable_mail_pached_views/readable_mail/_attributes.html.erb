@@ -1,0 +1,33 @@
+<%#
+  メール用属性リスト
+%>
+<div style="
+  width: 100%;
+  font-size: 0.8em;
+  display: flex;
+  flex-flow: row wrap;
+  ">
+  <% items.each do |it| %>
+    <div style="
+      width: 50%;
+      display: flex;
+      flex-direction: row;
+      ">
+      <div style="
+        color:#a0a0a0;
+        width: 8em;
+        flex: 0 0 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        "><%= it[:key] %>:</div>
+      <div style="
+        flex: 1 1 auto;
+        margin-right: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        "><%= it[:value] %></div>
+    </div>
+  <% end %>
+</div>

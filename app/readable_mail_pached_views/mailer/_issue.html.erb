@@ -1,0 +1,22 @@
+<%#
+  チケット概要
+%>
+<div style="margin: 0 5px">
+  <%= textilizable(issue, :description, only_path: false) %>
+</div>
+
+<%= hr %>
+
+<% items = fine_mail_email_issue_attributes(issue, users.first) %>
+<%= render partial: 'readable_mail/attributes', locals: { items: items } %>
+
+<% if issue.attachments.any? %>
+  <div style="color:#a0a0a0; font-size: 0.8em;">
+    <%= l(:label_attachment_plural) %>:
+  </div>
+  <% issue.attachments.each do |attachment| %>
+    <%= link_to_attachment attachment, download: true, only_path: false, style: 'color:#0298CD' %>
+    <i>(<%= number_to_human_size(attachment.filesize) %>)</i><br>
+  <% end %>
+<% end %>
+

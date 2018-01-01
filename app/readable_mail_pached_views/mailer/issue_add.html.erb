@@ -1,0 +1,31 @@
+<%#
+  issue_add: チケット追加
+%>
+<%= render layout: 'readable_mail/container', locals: { border_top: true } do %>
+  <h1 style="margin: 0; font-size: 1.2em;">
+    <span style="
+      border-right: 1px solid #999;
+      padding-right: 2px;
+      margin-right: 5px;
+    ">
+      新規追加
+    </span>
+    <%= link_to(
+      "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}",
+      @issue_url,
+      style: 'color:#0298CD; text-decoration: none;'
+    ) %>
+  </h1>
+<% end %>
+
+<%= render layout: 'readable_mail/container' do %>
+  <%= l(:text_issue_added,
+         id: "##{@issue.id}",
+         author: h(@issue.author)).html_safe %>
+
+  <%= hr %>
+
+  <%= render partial: 'issue',
+    formats: [:html],
+    locals: { issue: @issue, users: @users, issue_url: @issue_url } %>
+<% end %>

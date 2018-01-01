@@ -1,0 +1,34 @@
+<%#
+  チケット変更差分の表示
+%>
+<%= l(diff.change, scope: 'readable_mail.diff_change') %>
+<% def diff_value(diff) %>
+  <% if diff.detail.property == 'attachment' %>
+    <%= link_to_attachment(diff.value, download: false, only_path: false) %>
+  <% else %>
+    <%= diff.value %>
+  <% end %>
+<% end %>
+
+<% case diff.change %>
+  <% when :deleted %>
+    <i><del><%= diff.old_value %></del></i>
+
+  <% when :changed %>
+    <i><del><%= diff.old_value %></del></i>
+    →
+    <i><%= diff_value(diff) %></i>
+
+  <% when :added, :set_to %>
+    <i><%= diff_value(diff) %></i>
+
+  <% when :updated %>
+    <%= link_to 'diff',
+      diff_journal_url(
+        diff.detail.journal_id,
+        detail_id: diff.detail.id,
+        only_path: false
+      ),
+      title: l(:label_view_diff)
+    %>
+<% end %>
