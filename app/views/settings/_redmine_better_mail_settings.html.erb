@@ -1,0 +1,14 @@
+<%#
+  better mail plugin admin settings
+%>
+<table>
+  <tbody>
+    <tr>
+      <th>Use better mails view</th>
+      <td>
+        <%= check_box_tag 'settings[uses_mails_view]', true,
+                          settings['uses_mails_view'] %>
+      </td>
+    </tr>
+  </tbody>
+</table>

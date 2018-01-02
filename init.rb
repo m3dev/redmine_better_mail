@@ -4,6 +4,11 @@ Redmine::Plugin.register :redmine_better_mail do
   author 'tak'
   description 'This is a plugin to better Redmine mail'
   version '0.0.1'
+
+  settings partial: 'settings/redmine_better_mail_settings',
+           default: {
+             'uses_mails_view' => true
+           }
 end
 
 
