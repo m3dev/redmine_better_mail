@@ -11,15 +11,9 @@
   <h1 style="margin: 0; font-size: 1.2em;">
     <span style="
       border-right: 1px solid #999;
-      padding-right: 2px;
+      padding-right: 5px;
       margin-right: 5px;
-    ">
-      <% if status_diff %>
-        ステータス変更
-      <% else %>
-        変更
-      <% end %>
-    </span>
+      "><%= l(status_diff ? :change_status : :change, scope: 'readable_mail.issue_change') %></span>
     <%= link_to(
       "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}",
       @issue_url,

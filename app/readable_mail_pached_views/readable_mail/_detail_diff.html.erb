@@ -1,7 +1,7 @@
 <%#
   チケット変更差分の表示
 %>
-<%= l(diff.change, scope: 'readable_mail.diff_change') %>
+<%= l(diff.change, scope: 'readable_mail.attr_change') %>
 <% def diff_value(diff) %>
   <% if diff.detail.property == 'attachment' %>
     <%= link_to_attachment(diff.value, download: false, only_path: false) %>

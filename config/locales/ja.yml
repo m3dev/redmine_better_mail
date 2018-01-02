@@ -1,9 +1,12 @@
 ja:
   readable_mail:
-    diff_change:
+    attr_change:
       updated: 更新
       changed: 変更
       added: 追加
       set_to: 設定
       deleted: 削除
-
+    issue_change:
+      new: 新規
+      change_status: ステータス変更
+      change: 変更

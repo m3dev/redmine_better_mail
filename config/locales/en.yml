@@ -1,9 +1,12 @@
 en:
   readable_mail:
-    diff_change:
+    attr_change:
       updated: updated
       changed: changed
       added: added
       set_to: set to
       deleted: deleted
-
+    issue_change:
+      new: NEW
+      change_status: CHANGE STATUS
+      change: CHANGE
