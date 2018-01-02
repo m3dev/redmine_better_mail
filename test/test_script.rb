@@ -28,15 +28,19 @@ def issue_edit2
     Mailer.deliver_issue_edit(journal)
 end
 
+def test
+  test_email
+  issue_add
+  issue_edit
+  issue_edit2
+end
+
 Setting.default_language = 'ja'
-#test_email
-issue_add
-issue_edit
-issue_edit2
+test
 
 Setting.default_language = 'en'
-#test_email
-issue_add
-issue_edit
-issue_edit2
+test
+
+Setting.plain_text_mail = '1'
+test
 
