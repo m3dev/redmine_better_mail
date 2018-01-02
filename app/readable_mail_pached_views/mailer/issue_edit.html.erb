@@ -2,7 +2,7 @@
   issue_edit: チケット編集
 %>
 <%
-  detail_diffs = fine_mail_details_diffs(@journal_details)
+  detail_diffs = readable_mail_details_diffs(@journal_details)
   status_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'status_id'}
   desc_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'description'}
 %>

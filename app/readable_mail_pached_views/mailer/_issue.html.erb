@@ -7,7 +7,7 @@
 
 <%= hr %>
 
-<% items = fine_mail_email_issue_attributes(issue, users.first) %>
+<% items = readable_mail_email_issue_attributes(issue, users.first) %>
 <%= render partial: 'readable_mail/attributes', locals: { items: items } %>
 
 <% if issue.attachments.any? %>

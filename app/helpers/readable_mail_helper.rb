@@ -1,4 +1,4 @@
-module FineMailHelper
+module ReadableMailHelper
   def hr
     <<-EOS.html_safe
       <div style="
@@ -9,7 +9,7 @@ module FineMailHelper
     EOS
   end
 
-  def fine_mail_email_issue_attributes(issue, user)
+  def readable_mail_email_issue_attributes(issue, user)
     items = []
     %w(author status priority assigned_to category fixed_version).each do |attribute|
       unless issue.disabled_core_fields.include?(attribute + "_id")
@@ -22,7 +22,7 @@ module FineMailHelper
     items
   end
 
-  def fine_mail_details_diffs(details)
+  def readable_mail_details_diffs(details)
     detail_diffs = []
     values_by_field = {}
     details.each do |detail|
@@ -40,7 +40,7 @@ module FineMailHelper
         end
       end
 
-      detail_diffs << fine_mail_detail_diff(detail)
+      detail_diffs << readable_mail_detail_diff(detail)
     end
 
     if values_by_field.present?
@@ -49,12 +49,12 @@ module FineMailHelper
         if changes[:added].any?
           detail = multiple_values_detail.new('cf', field.id.to_s, field)
           detail.value = changes[:added]
-          detail_diffs << fine_mail_detail_diff(detail)
+          detail_diffs << readable_mail_detail_diff(detail)
         end
         if changes[:deleted].any?
           detail = multiple_values_detail.new('cf', field.id.to_s, field)
           detail.old_value = changes[:deleted]
-          detail_diffs << fine_mail_detail_diff(detail)
+          detail_diffs << readable_mail_detail_diff(detail)
         end
       end
     end
@@ -64,7 +64,7 @@ module FineMailHelper
 
   private
 
-  def fine_mail_detail_diff(detail)
+  def readable_mail_detail_diff(detail)
     multiple = false
     show_diff = false
 
