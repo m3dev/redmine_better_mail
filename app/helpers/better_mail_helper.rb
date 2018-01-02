@@ -1,4 +1,4 @@
-module ReadableMailHelper
+module BetterMailHelper
   def hr
     <<-EOS.html_safe
       <div style="
@@ -9,7 +9,7 @@ module ReadableMailHelper
     EOS
   end
 
-  def readable_mail_email_issue_attributes(issue, user)
+  def better_mail_email_issue_attributes(issue, user)
     items = []
     %w(author status priority assigned_to category fixed_version).each do |attribute|
       unless issue.disabled_core_fields.include?(attribute + "_id")
@@ -22,7 +22,7 @@ module ReadableMailHelper
     items
   end
 
-  def readable_mail_details_diffs(details)
+  def better_mail_details_diffs(details)
     detail_diffs = []
     values_by_field = {}
     details.each do |detail|
@@ -40,7 +40,7 @@ module ReadableMailHelper
         end
       end
 
-      detail_diffs << readable_mail_detail_diff(detail)
+      detail_diffs << better_mail_detail_diff(detail)
     end
 
     if values_by_field.present?
@@ -49,12 +49,12 @@ module ReadableMailHelper
         if changes[:added].any?
           detail = multiple_values_detail.new('cf', field.id.to_s, field)
           detail.value = changes[:added]
-          detail_diffs << readable_mail_detail_diff(detail)
+          detail_diffs << better_mail_detail_diff(detail)
         end
         if changes[:deleted].any?
           detail = multiple_values_detail.new('cf', field.id.to_s, field)
           detail.old_value = changes[:deleted]
-          detail_diffs << readable_mail_detail_diff(detail)
+          detail_diffs << better_mail_detail_diff(detail)
         end
       end
     end
@@ -64,7 +64,7 @@ module ReadableMailHelper
 
   private
 
-  def readable_mail_detail_diff(detail)
+  def better_mail_detail_diff(detail)
     multiple = false
     show_diff = false
 

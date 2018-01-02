@@ -1,19 +1,19 @@
 <%#
-  issue_edit: チケット編集
+  view of issue_edit
 %>
 <%
-  detail_diffs = readable_mail_details_diffs(@journal_details)
+  detail_diffs = better_mail_details_diffs(@journal_details)
   status_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'status_id'}
   desc_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'description'}
 %>
 
-<%= render layout: 'readable_mail/container', locals: { border_top: true } do %>
+<%= render layout: 'better_mail_shared/container', locals: { border_top: true } do %>
   <h1 style="margin: 0; font-size: 1.2em;">
     <span style="
       border-right: 1px solid #999;
       padding-right: 5px;
       margin-right: 5px;
-      "><%= l(status_diff ? :change_status : :change, scope: 'readable_mail.issue_change') %></span>
+      "><%= l(status_diff ? :change_status : :change, scope: 'better_mail.issue_change') %></span>
     <%= link_to(
       "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}",
       @issue_url,
@@ -22,7 +22,7 @@
   </h1>
 <% end %>
 
-<%= render layout: 'readable_mail/container' do %>
+<%= render layout: 'better_mail_shared/container' do %>
   <%= l(:text_issue_updated,
         id: "##{@issue.id}",
         author: h(@journal.user)).html_safe %>
@@ -74,13 +74,13 @@
     <%= hr %>
   <% end %>
 
-  <%= render partial: 'readable_mail/attributes',
+  <%= render partial: 'better_mail_shared/attributes',
     locals: {
       items:
         detail_diffs.map do |diff|
           {
             key: diff.label,
-            value: render(partial: 'readable_mail/detail_diff', locals: { diff: diff }).html_safe
+            value: render(partial: 'better_mail_shared/detail_diff', locals: { diff: diff }).html_safe
           }
         end
     }
@@ -88,7 +88,7 @@
 
 <% end %>
 
-<%= render layout: 'readable_mail/container' do %>
+<%= render layout: 'better_mail_shared/container' do %>
   <%= render partial: 'issue',
     formats: [:html],
     locals: { issue: @issue, users: @users, issue_url: @issue_url } %>
