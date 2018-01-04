@@ -36,6 +36,10 @@ def test
 end
 
 Setting.default_language = 'ja'
+Setting.plain_text_mail = '0'
+Setting.plugin_redmine_better_mail['uses_mails_view'] = true
+
+Setting.default_language = 'ja'
 test
 
 Setting.default_language = 'en'
@@ -43,4 +47,8 @@ test
 
 Setting.plain_text_mail = '1'
 test
+
+Setting.default_language = 'ja'
+Setting.plain_text_mail = '0'
+Setting.plugin_redmine_better_mail['uses_mails_view'] = true
 
