@@ -14,25 +14,37 @@
   margin: 0;
   font-size: 12px;
   ">
-  <div style="display: flex; flex-direction: column;">
+  <table style="width: 100%;">
     <% if Setting.emails_header.present? %>
-      <div style="padding: 0px 10px; color: #aaa; font-size: 0.8em;">
-        <%= Redmine::WikiFormatting.to_html(
-          Setting.text_formatting, Setting.emails_header
-        ).html_safe %>
-      </div>
+    <tr>
+      <td>
+        <div style="padding: 0px 10px; color: #aaa; font-size: 0.8em;">
+          <%= Redmine::WikiFormatting.to_html(
+            Setting.text_formatting, Setting.emails_header
+          ).html_safe %>
+        </div>
+      </td>
+    </tr>
     <% end -%>
 
-    <%= yield %>
+    <tr>
+      <td>
+        <%= yield %>
+      </td>
+    </tr>
 
     <% if Setting.emails_footer.present? %>
-      <div style="padding: 0px 10px; color: #aaa; font-size: 0.8em;">
-        <%= Redmine::WikiFormatting.to_html(
-          Setting.text_formatting, Setting.emails_footer
-        ).html_safe %>
-      </div>
+    <tr>
+      <td>
+        <div style="padding: 0px 10px; color: #aaa; font-size: 0.8em;">
+          <%= Redmine::WikiFormatting.to_html(
+            Setting.text_formatting, Setting.emails_footer
+          ).html_safe %>
+        </div>
+      </td>
+    </tr>
     <% end %>
-  </div>
+  </table>
 </div>
 </body>
 </html>
