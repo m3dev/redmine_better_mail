@@ -4,15 +4,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
-
-<body style="
+<body>
+<div style="
   padding: 10px 15px;
   background-color:#f0f0f0;
   margin: 0;
   font-size: 12px;
   ">
   <div style="display: flex; flex-direction: column;">
-
     <% if Setting.emails_header.present? %>
       <div style="padding: 0px 10px; color: #aaa; font-size: 0.8em;">
         <%= Redmine::WikiFormatting.to_html(
@@ -31,5 +30,6 @@
       </div>
     <% end %>
   </div>
+</div>
 </body>
 </html>
