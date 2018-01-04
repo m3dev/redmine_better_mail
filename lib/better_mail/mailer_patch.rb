@@ -5,9 +5,6 @@ module BetterMail
 
       base.class_eval do
         before_filter :better_mail_prepend_mailer_view_path
-        layout :better_mail_layout, only: [
-          :issue_add, :issue_edit
-        ]
       end
     end
 
@@ -19,15 +16,6 @@ module BetterMail
           better_mail_plugin.directory,
           'app', 'better_mail_patched_views'
         )
-      end
-
-      def better_mail_layout
-        return 'mailer' unless better_mail_uses_mail_view?
-
-        # plain text is not supported
-        return 'mailer' if Setting.plain_text_mail?
-
-        'better_mail_layout'
       end
 
       private
