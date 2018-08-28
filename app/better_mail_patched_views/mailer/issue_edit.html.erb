@@ -3,8 +3,12 @@
 %>
 <%
   detail_diffs = better_mail_details_diffs(@journal_details)
-  status_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'status_id'}
   desc_diff = detail_diffs.detect {|d| d.detail.property == 'attr' && d.detail.prop_key == 'description'}
+
+  pickups = ['status_id', 'assigned_to_id']
+  diffs = detail_diffs.select {|d| d.detail.property == 'attr' && pickups.include?(d.detail.prop_key)}
+    .map {|diff| [diff.detail.prop_key.sub(/_id$/, ''), diff]}
+    .to_h
 %>
 
 <%= render layout: 'better_mail_shared/container', locals: { border_top: true } do %>
@@ -13,7 +17,7 @@
       border-right: 1px solid #999;
       padding-right: 5px;
       margin-right: 5px;
-      "><%= l(status_diff ? :change_status : :change, scope: 'better_mail.issue_change') %></span>
+      "><%= l(diffs['status'] ? :change_status : :change, scope: 'better_mail.issue_change') %></span>
     <%= link_to(
       "#{@issue.tracker.name} ##{@issue.id}: #{@issue.subject}",
       @issue_url,
@@ -29,17 +33,17 @@
 
   <%= hr %>
 
-  <% if status_diff %>
-    <div style="color:#a0a0a0; font-size: 0.8em;">
-      <%= l(:field_status) %>:
-    </div>
-
-    <div>
-      <%= status_diff.old_value %>
-      →
-      <%= status_diff.value %>
-    </div>
-
+  <% unless diffs.empty? %>
+    <% diffs.each do |f, diff| %>
+      <div style="color:#a0a0a0; font-size: 0.8em;">
+        <%= l("field_#{f}".to_sym) %>:
+      </div>
+      <div>
+        <%= diff.old_value %>
+        →
+        <%= diff.value %>
+      </div>
+    <% end %>
     <%= hr %>
   <% end %>
 
